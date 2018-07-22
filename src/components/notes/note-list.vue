@@ -24,16 +24,38 @@
             </tr>
             </tbody>
         </table>
+
+        <p><button class="button" @click.prevent="openMe">Click me for a modal</button></p>
+
+        <div class="reveal" id="exampleModal11" aria-labelledby="exampleModalHeader11" data-reveal>
+            <h1 id="exampleModalHeader11">Label for the Modal!</h1>
+            <p class="lead">I am even more accessible than the other modals.</p>
+            <button class="close-button" data-close aria-label="Close Accessible Modal" type="button">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
     </div>
 
 </template>
 <script>
+
+   // import * as Reveal from "foundation-sites/js/foundation.reveal";
+
     export default{
         props:["notelist"],
         data(){
             return{
                 searchterm:"",
             }
+        },
+        methods: {
+
+            openMe() {
+                var popup = new Foundation.Reveal($('#exampleModal11'));
+                popup.open();
+            }
+
         },
         computed:{
             filteredNotes:function () {
@@ -45,6 +67,16 @@
                         .filter(note=>note.title.toLowerCase()
                             .indexOf(this.searchterm.toLowerCase())!==-1);
             }
+        },
+
+        mounted: function () {
+            this.$nextTick(function () {
+               // window.$(this.$el).daterangepicker();
+
+               // window.$('#exampleModal11').foundation('open');
+
+
+            })
         }
     }
 </script>
